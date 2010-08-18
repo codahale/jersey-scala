@@ -37,6 +37,14 @@ object ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockit
       extractor.builder must beEqualTo(Seq.newBuilder[String])
     }
 
+    def `should create a new builder for each injectable` {
+      val param = new Parameter(Array(), null, null, "name", null, classOf[List[String]], true, "default")
+      val extractor1 = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable].extractor.asInstanceOf[ScalaCollectionParameterExtractor[List[String]]]
+      val extractor2 = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable].extractor.asInstanceOf[ScalaCollectionParameterExtractor[List[String]]]
+
+      extractor1.builder must notBe(extractor2.builder)
+    }
+
     def `should return an injectable for List instances` {
       val param = new Parameter(Array(), null, null, "name", null, classOf[List[String]], true, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
