@@ -1,6 +1,5 @@
 package com.codahale.jersey
 
-import scala.collection.mutable.Builder
 import javax.ws.rs.QueryParam
 import javax.ws.rs.ext.Provider
 import com.sun.jersey.api.model.Parameter
@@ -23,12 +22,12 @@ class ScalaCollectionsQueryParamInjectableProvider extends InjectableProvider[Qu
     } else null
   }
 
-  private def build(klass: Class[_]): Builder[String, _ <: Object] = {
-         if (klass == classOf[Seq[String]])        Seq.newBuilder[String]
-    else if (klass == classOf[List[String]])       List.newBuilder[String]
-    else if (klass == classOf[Vector[String]])     Vector.newBuilder[String]
-    else if (klass == classOf[IndexedSeq[String]]) IndexedSeq.newBuilder[String]
-    else if (klass == classOf[Set[String]])        Set.newBuilder[String]
+  private def build(klass: Class[_]): CollectionBuilder[_ <: Object] = {
+         if (klass == classOf[Seq[String]])        SeqCollectionBuilder
+    else if (klass == classOf[List[String]])       ListCollectionBuilder
+    else if (klass == classOf[Vector[String]])     VectorCollectionBuilder
+    else if (klass == classOf[IndexedSeq[String]]) IndexedSeqCollectionBuilder
+    else if (klass == classOf[Set[String]])        SetCollectionBuilder
     else null
   }
 }

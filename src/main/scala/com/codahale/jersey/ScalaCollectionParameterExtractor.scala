@@ -1,7 +1,6 @@
 package com.codahale.jersey
 
 import scala.collection.JavaConversions.asIterable
-import scala.collection.mutable.Builder
 import javax.ws.rs.core.MultivaluedMap
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 
@@ -13,17 +12,19 @@ import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParamet
  *
  * @author coda
  */
-class ScalaCollectionParameterExtractor[A <: Object](val parameter: String,
-                                                     val defaultValue: String,
-                                                     val builder: Builder[String, A])
+class ScalaCollectionParameterExtractor(val parameter: String,
+                                        val defaultValue: String,
+                                        val collectionBuilder: CollectionBuilder[_ <: Object])
         extends MultivaluedParameterExtractor {
 
   def getName = parameter
   def getDefaultStringValue = defaultValue
   def extract(parameters: MultivaluedMap[String, String]) = {
+    val builder = collectionBuilder()
     val params = parameters.get(parameter)
     if (params != null) {
-      builder ++= asIterable(params)
+      builder.sizeHint(params.size)
+      builder ++= asIterable(params).toTraversable
     } else if (defaultValue != null) {
       builder += defaultValue
     }
