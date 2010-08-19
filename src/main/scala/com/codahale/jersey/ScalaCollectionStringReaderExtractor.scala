@@ -13,10 +13,9 @@ import scala.collection.generic.GenericCompanion
  *
  * @author coda
  */
-class ScalaCollectionParameterExtractor[+CC[X] <: Traversable[X]](
-                                        parameter: String,
-                                        defaultValue: String,
-                                        companion: GenericCompanion[CC])
+class ScalaCollectionStringReaderExtractor[+CC[X] <: Traversable[X]](parameter: String,
+                                                                     defaultValue: String,
+                                                                     companion: GenericCompanion[CC])
         extends MultivaluedParameterExtractor {
 
   def getName = parameter

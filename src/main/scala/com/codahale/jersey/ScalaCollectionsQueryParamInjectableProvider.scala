@@ -19,15 +19,15 @@ class ScalaCollectionsQueryParamInjectableProvider extends InjectableProvider[Qu
 
   private def buildExtractor(name: String, default: String, klass: Class[_]): MultivaluedParameterExtractor = {
     if (klass == classOf[Seq[String]]) {
-      new ScalaCollectionParameterExtractor[Seq](name, default, Seq)
+      new ScalaCollectionStringReaderExtractor[Seq](name, default, Seq)
     } else if (klass == classOf[List[String]]) {
-      new ScalaCollectionParameterExtractor[List](name, default, List)
+      new ScalaCollectionStringReaderExtractor[List](name, default, List)
     } else if (klass == classOf[Vector[String]]) {
-      new ScalaCollectionParameterExtractor[Vector](name, default, Vector)
+      new ScalaCollectionStringReaderExtractor[Vector](name, default, Vector)
     } else if (klass == classOf[IndexedSeq[String]]) {
-      new ScalaCollectionParameterExtractor[IndexedSeq](name, default, IndexedSeq)
+      new ScalaCollectionStringReaderExtractor[IndexedSeq](name, default, IndexedSeq)
     } else if (klass == classOf[Set[String]]) {
-      new ScalaCollectionParameterExtractor[Set](name, default, Set)
+      new ScalaCollectionStringReaderExtractor[Set](name, default, Set)
     } else null
   }
 
