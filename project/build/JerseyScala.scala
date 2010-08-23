@@ -15,6 +15,9 @@ class JerseyScala(info: sbt.ProjectInfo) extends sbt.DefaultProject(info) with p
    * Dependencies
    */
   val sunRepo = "Sun Repo" at "http://download.java.net/maven/2/"
+  
+  val liftJson = "net.liftweb" %% "lift-json" % "2.1-M1" withSources() intransitive()
+  val paranamer = "com.thoughtworks.paranamer" % "paranamer" % "2.0" withSources() intransitive()
 
   val jaxrs = "javax.ws.rs" % "jsr311-api" % "1.1.1" withSources() intransitive()
   val jerseyCore = "com.sun.jersey" % "jersey-core" % "1.3" withSources() intransitive()
