@@ -18,7 +18,7 @@ object JValueProviderSpec extends Spec with Mockito {
     }
 
     def `should be readable` {
-      provider.isWriteable(value.getClass, null, null, null) must beTrue
+      provider.isReadable(value.getClass, null, null, null) must beTrue
     }
   }
 
