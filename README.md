@@ -37,6 +37,8 @@ What All This Supports
 
 * `QueryParam`-annotated parameters of type `Seq[String]`, `List[String]`,
   `Vector[String]`, `IndexedSeq[String]`, and `Set[String]`.
+* `JsonAST.JValue` request and response entities.
+* Case class (i.e., `Product` instances) request and response entities.
 
 
 License
