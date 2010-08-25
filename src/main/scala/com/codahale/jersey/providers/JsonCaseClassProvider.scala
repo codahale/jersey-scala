@@ -1,16 +1,16 @@
 package com.codahale.jersey.providers
 
-import javax.ws.rs.ext.Provider
-import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
-import java.lang.reflect.Type
-import net.liftweb.json.{NoTypeHints, Serialization}
+import scala.reflect.Manifest
+import java.io.{InputStreamReader, InputStream, OutputStreamWriter, OutputStream}
 import java.lang.annotation.Annotation
+import java.lang.reflect.Type
+import javax.ws.rs.{WebApplicationException, Produces, Consumes}
 import javax.ws.rs.core.Response.Status
 import javax.ws.rs.core.{Response, MultivaluedMap, MediaType}
-import javax.ws.rs.{WebApplicationException, Produces, Consumes}
+import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
+import javax.ws.rs.ext.Provider
+import net.liftweb.json.{NoTypeHints, Serialization}
 import net.liftweb.json.JsonParser.{ParseException, parse}
-import java.io.{InputStreamReader, InputStream, OutputStreamWriter, OutputStream}
-import scala.reflect.{Manifest, ClassManifest}
 
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
