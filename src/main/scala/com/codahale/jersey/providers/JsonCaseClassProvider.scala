@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response.Status
 import javax.ws.rs.core.{Response, MultivaluedMap, MediaType}
 import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import javax.ws.rs.ext.Provider
-import net.liftweb.json.{NoTypeHints, Serialization}
 import net.liftweb.json.JsonParser.{ParseException, parse}
+import net.liftweb.json.{MappingException, NoTypeHints, Serialization}
 
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
@@ -44,7 +44,7 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
       val json = parse(reader)
       json.extract(formats, Manifest.classType(t))
     } catch {
-      case e: ParseException =>
+      case e @ (_: ParseException | _: MappingException) =>
         throw new WebApplicationException(
           Response.status(Status.BAD_REQUEST)
                   .entity(e.getMessage)
