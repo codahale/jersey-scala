@@ -1,4 +1,4 @@
-package com.codahale.jersey.specs
+package com.codahale.jersey.inject.specs
 
 import com.codahale.simplespec.Spec
 import org.specs.mock.Mockito
@@ -6,7 +6,7 @@ import org.mockito.Matchers.anyBoolean
 import javax.ws.rs.QueryParam
 import com.sun.jersey.api.model.Parameter
 import com.sun.jersey.core.spi.component.{ComponentContext, ComponentScope}
-import com.codahale.jersey.{ScalaCollectionQueryParamInjectable, ScalaCollectionsQueryParamInjectableProvider}
+import com.codahale.jersey.inject.{ScalaCollectionQueryParamInjectable, ScalaCollectionsQueryParamInjectableProvider}
 import com.sun.jersey.core.util.MultivaluedMapImpl
 import com.sun.jersey.api.core.{HttpContext, ExtendedUriInfo}
 

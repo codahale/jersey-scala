@@ -1,4 +1,4 @@
-package com.codahale.jersey
+package com.codahale.jersey.inject
 
 import scala.collection.JavaConversions.asIterable
 import javax.ws.rs.core.MultivaluedMap

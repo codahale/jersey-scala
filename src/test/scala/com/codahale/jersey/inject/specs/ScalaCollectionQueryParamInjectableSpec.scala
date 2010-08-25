@@ -1,8 +1,8 @@
-package com.codahale.jersey.specs
+package com.codahale.jersey.inject.specs
 
 import com.codahale.simplespec.Spec
 import org.specs.mock.Mockito
-import com.codahale.jersey.ScalaCollectionQueryParamInjectable
+import com.codahale.jersey.inject.ScalaCollectionQueryParamInjectable
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import com.sun.jersey.api.core.{ExtendedUriInfo, HttpContext}
 import javax.ws.rs.core.{MultivaluedMap, UriInfo}

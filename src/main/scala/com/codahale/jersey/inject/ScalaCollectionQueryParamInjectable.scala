@@ -1,4 +1,4 @@
-package com.codahale.jersey
+package com.codahale.jersey.inject
 
 import com.sun.jersey.api.ParamException
 import com.sun.jersey.api.core.HttpContext

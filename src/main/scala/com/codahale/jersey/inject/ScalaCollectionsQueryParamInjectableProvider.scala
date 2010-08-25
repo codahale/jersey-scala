@@ -1,4 +1,4 @@
-package com.codahale.jersey
+package com.codahale.jersey.inject
 
 import javax.ws.rs.QueryParam
 import javax.ws.rs.ext.Provider

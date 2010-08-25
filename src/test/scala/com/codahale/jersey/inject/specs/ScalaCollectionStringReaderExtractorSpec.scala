@@ -1,6 +1,6 @@
-package com.codahale.jersey.specs
+package com.codahale.jersey.inject.specs
 
-import com.codahale.jersey.ScalaCollectionStringReaderExtractor
+import com.codahale.jersey.inject.ScalaCollectionStringReaderExtractor
 import com.codahale.simplespec.Spec
 import com.sun.jersey.core.util.MultivaluedMapImpl
 
