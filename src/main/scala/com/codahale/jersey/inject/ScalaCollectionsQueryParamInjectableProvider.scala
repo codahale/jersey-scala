@@ -28,6 +28,8 @@ class ScalaCollectionsQueryParamInjectableProvider extends InjectableProvider[Qu
       new ScalaCollectionStringReaderExtractor[IndexedSeq](name, default, IndexedSeq)
     } else if (klass == classOf[Set[String]]) {
       new ScalaCollectionStringReaderExtractor[Set](name, default, Set)
+    } else if (klass == classOf[Option[String]]) {
+      new ScalaOptionStringExtractor(name, default)
     } else null
   }
 

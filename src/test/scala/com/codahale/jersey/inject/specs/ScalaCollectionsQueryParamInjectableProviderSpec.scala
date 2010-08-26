@@ -66,5 +66,12 @@ object ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockit
 
       injectable.getValue(httpContext) must beEqualTo(Set("one", "two", "three"))
     }
+
+    def `should return an injectable for Option instances` {
+      val param = new Parameter(Array(), null, null, "name", null, classOf[Option[String]], false, "default")
+      val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
+
+      injectable.getValue(httpContext) must beEqualTo(Some("one"))
+    }
   }
 }
