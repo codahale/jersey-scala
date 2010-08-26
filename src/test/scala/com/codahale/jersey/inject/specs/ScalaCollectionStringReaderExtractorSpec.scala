@@ -5,7 +5,7 @@ import com.codahale.simplespec.Spec
 import com.sun.jersey.core.util.MultivaluedMapImpl
 
 object ScalaCollectionStringReaderExtractorSpec extends Spec {
-  class `Extracting a query parameter` {
+  class `Extracting a parameter` {
     val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", "default", Set)
 
     def `should have a name` {
@@ -34,7 +34,7 @@ object ScalaCollectionStringReaderExtractorSpec extends Spec {
     }
   }
 
-  class `Extracting a query parameter with no default value` {
+  class `Extracting a parameter with no default value` {
     val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", null, Set)
 
     def `should return an empty collection` {
