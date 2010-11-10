@@ -9,6 +9,8 @@ import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
 
 object JValueProviderSpec extends Spec with Mockito {
+  detailedDiffs("()")
+
   class `A JValue instance` {
     val value = mock[JValue]
     val provider = new JValueProvider
@@ -42,7 +44,7 @@ object JValueProviderSpec extends Spec with Mockito {
         case e: WebApplicationException =>
           val response = e.getResponse
           response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("expected field or array\nNear: {\"yay\": 1")
+          response.getEntity must beEqualTo("expected object or array")
       }
     }
   }
