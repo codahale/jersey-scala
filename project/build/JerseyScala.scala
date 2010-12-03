@@ -21,7 +21,7 @@ class JerseyScala(info: ProjectInfo) extends DefaultProject(info) with posterous
    */
   val sunRepo = "Sun Repo" at "http://download.java.net/maven/2/"
 
-  val jerkson = "com.codahale" %% "jerkson" % "0.0.1-SNAPSHOT" withSources () intransitive ()
+  val jerkson = "com.codahale" %% "jerkson" % "0.1.0" withSources () intransitive ()
   val jacksonVersion = "1.6.2"
   val jacksonCore = "org.codehaus.jackson" % "jackson-core-asl" % jacksonVersion withSources () intransitive ()
   val jacksonMapper = "org.codehaus.jackson" % "jackson-mapper-asl" % jacksonVersion withSources () intransitive ()
