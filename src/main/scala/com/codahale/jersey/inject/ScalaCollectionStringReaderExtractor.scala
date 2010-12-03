@@ -1,6 +1,6 @@
 package com.codahale.jersey.inject
 
-import scala.collection.JavaConversions.asIterable
+import scala.collection.JavaConversions._
 import javax.ws.rs.core.MultivaluedMap
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import scala.collection.generic.GenericCompanion
@@ -25,7 +25,7 @@ class ScalaCollectionStringReaderExtractor[+CC[X] <: Traversable[X]](parameter: 
     val params = parameters.get(parameter)
     if (params != null) {
       builder.sizeHint(params.size)
-      builder ++= asIterable(params)
+      builder ++= params
     } else if (defaultValue != null) {
       builder += defaultValue
     }
