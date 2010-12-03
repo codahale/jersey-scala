@@ -56,7 +56,7 @@ object JsonCaseClassProviderSpec extends Spec {
         case e: WebApplicationException => {
           val response = e.getResponse
           response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Invalid JSON.")
+          response.getEntity must beEqualTo("Invalid JSON. Needed [name], but found [yay].")
         }
       }
     }
