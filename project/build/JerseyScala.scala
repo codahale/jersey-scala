@@ -15,8 +15,7 @@ class JerseyScala(info: sbt.ProjectInfo) extends sbt.DefaultProject(info) with p
    * Dependencies
    */
   val sunRepo = "Sun Repo" at "http://download.java.net/maven/2/"
-  
-  val liftJson = "net.liftweb" % "lift-json_2.8.0" % "2.2-M1" withSources() intransitive()
+
   val jerkson = "com.codahale" %% "jerkson" % "0.0.1-SNAPSHOT" withSources () intransitive ()
   val jacksonVersion = "1.6.2"
   val jacksonCore = "org.codehaus.jackson" % "jackson-core-asl" % jacksonVersion withSources () intransitive ()
