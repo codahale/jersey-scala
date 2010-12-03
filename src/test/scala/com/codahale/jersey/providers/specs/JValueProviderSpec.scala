@@ -4,7 +4,7 @@ import com.codahale.simplespec.Spec
 import org.specs.mock.Mockito
 import com.codahale.jersey.providers.JValueProvider
 import javax.ws.rs.core.MediaType
-import net.liftweb.json.JsonAST.{JObject, JValue, JField, JInt}
+import com.codahale.jerkson.AST._
 import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
 
@@ -30,7 +30,7 @@ object JValueProviderSpec extends Spec with Mockito {
 
     def `should return a JValue instance` {
       val value = provider.readFrom(null, null, null, null, null, new ByteArrayInputStream(entity.getBytes))
-      
+
       value must beEqualTo(JObject(List(JField("yay", JInt(1)))))
     }
   }
@@ -44,7 +44,7 @@ object JValueProviderSpec extends Spec with Mockito {
         case e: WebApplicationException =>
           val response = e.getResponse
           response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("expected object or array")
+          response.getEntity must beEqualTo("Malformed JSON. Unexpected end-of-input: expected close marker for OBJECT at character offset 26.")
       }
     }
   }
@@ -57,18 +57,6 @@ object JValueProviderSpec extends Spec with Mockito {
       val output = new ByteArrayOutputStream
       provider.writeTo(json, null, null, null, MediaType.APPLICATION_JSON_TYPE, null, output)
       output.toString must beEqualTo("{\"yay\":1}")
-    }
-  }
-
-  class `Rendering an application/json+pretty response entity` {
-    val provider = new JValueProvider
-    val json = JObject(List(JField("yay", JInt(1))))
-
-    def `should produce a pretty JSON object` {
-      val output = new ByteArrayOutputStream
-      provider.writeTo(json, null, null, null, new MediaType("application", "json+pretty"), null, output)
-
-      output.toString must beEqualTo("{\n  \"yay\":1\n}")
     }
   }
 }
