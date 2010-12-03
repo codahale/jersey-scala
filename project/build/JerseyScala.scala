@@ -19,9 +19,8 @@ class JerseyScala(info: sbt.ProjectInfo) extends sbt.DefaultProject(info) with p
   val liftJson = "net.liftweb" % "lift-json_2.8.0" % "2.2-M1" withSources() intransitive()
   val paranamer = "com.thoughtworks.paranamer" % "paranamer" % "2.2.1" withSources() intransitive()
 
-  val jaxrs = "javax.ws.rs" % "jsr311-api" % "1.1.1" withSources() intransitive()
-  val jerseyCore = "com.sun.jersey" % "jersey-core" % "1.3" withSources() intransitive()
-  val jerseyServer = "com.sun.jersey" % "jersey-server" % "1.3" withSources() intransitive()
+  val jerseyCore = "com.sun.jersey" % "jersey-core" % "1.5-ea06" withSources() intransitive()
+  val jerseyServer = "com.sun.jersey" % "jersey-server" % "1.5-ea06" withSources() intransitive()
 
   val codasRepo = "Coda's Repo" at "http://repo.codahale.com"
   val specs = "org.scala-tools.testing" %% "specs" % "1.6.6" % "test" withSources()
