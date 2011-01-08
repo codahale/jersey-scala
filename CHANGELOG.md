@@ -1,4 +1,4 @@
-v0.1.1-SNAPSHOT: TBD
+v0.1.1: Jan 07 2011
 ===================
 
 * Moved to maven-sbt
