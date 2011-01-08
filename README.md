@@ -10,7 +10,8 @@ Requirements
 ------------
 
 * Scala 2.8.1
-* Jersey 1.5-ea06
+* Jerkson 0.1.2
+* Jersey 1.5-ea08
 
 
 How To Use
@@ -19,7 +20,7 @@ How To Use
 **First**, specify Jersey-Scala as a dependency:
     
     val codaRepo = "Coda Hale's Repository" at "http://repo.codahale.com/"
-    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.0" withSources()
+    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.1" withSources()
 
 **Second**, write your resource classes:
     
@@ -45,6 +46,6 @@ What All This Supports
 License
 -------
 
-Copyright (c) 2010 Coda Hale
+Copyright (c) 2010-2011 Coda Hale
 
 Published under The MIT License, see LICENSE
