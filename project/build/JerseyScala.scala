@@ -25,6 +25,7 @@ class JerseyScala(info: ProjectInfo) extends DefaultProject(info)
    */
   val jerkson = "com.codahale" %% "jerkson" % "0.1.2"
   val jerseyServer = "com.sun.jersey" % "jersey-server" % "1.5-ea08"
+  val slf4j = "org.slf4j" % "slf4j-api" % "1.6.1"
 
   /**
    * Test Dependencies
