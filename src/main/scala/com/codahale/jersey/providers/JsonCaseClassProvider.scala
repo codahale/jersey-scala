@@ -10,15 +10,22 @@ import javax.ws.rs.core.{Response, MultivaluedMap, MediaType}
 import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import javax.ws.rs.ext.Provider
 import com.codahale.jerkson.{ParsingException, Json}
+import org.slf4j.LoggerFactory
 
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
 @Consumes(Array(MediaType.APPLICATION_JSON))
 class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product] {
+  private val logger = LoggerFactory.getLogger(classOf[JsonCaseClassProvider])
+
   def writeTo(json: Product, t: Class[_], genericType: Type, annotations: Array[Annotation],
               mediaType: MediaType, httpHeaders: MultivaluedMap[String, AnyRef],
               entityStream: OutputStream) {
-    Json.generate(json, entityStream)
+    try {
+      Json.generate(json, entityStream)
+    } catch {
+      case e => logger.error("Error encoding %s as JSON".format(json), e)
+    }
   }
 
   def isWriteable(t: Class[_], genericType: Type, annotations: Array[Annotation],
@@ -37,6 +44,10 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
         throw new WebApplicationException(Response.status(Status.BAD_REQUEST)
                                           .entity(e.getMessage)
                                           .build)
+      }
+      case e => {
+        logger.error("Error decoding JSON request entity", e)
+        throw e
       }
     }
   }
