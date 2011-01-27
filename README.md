@@ -10,8 +10,9 @@ Requirements
 ------------
 
 * Scala 2.8.1
-* Jerkson 0.1.2
-* Jersey 1.5-ea08
+* Jerkson 0.1.4
+* Jersey 1.5
+* Slf4j API 1.6.1
 
 
 How To Use
@@ -20,7 +21,7 @@ How To Use
 **First**, specify Jersey-Scala as a dependency:
     
     val codaRepo = "Coda Hale's Repository" at "http://repo.codahale.com/"
-    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.1" withSources()
+    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.2" withSources()
 
 **Second**, write your resource classes:
     
