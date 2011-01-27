@@ -1,3 +1,10 @@
+v0.1.2: Jan 27 2011
+===================
+* Upgraded to jersey 1.5 final
+* Upgraded to jerkson 0.1.4
+* Added slf4j-api dependency
+* Now logging exceptions generated in jersey-scala providers
+
 v0.1.1: Jan 07 2011
 ===================
 

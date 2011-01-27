@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider
 import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import com.codahale.jerkson.AST.JValue
 import com.codahale.jerkson.{Json, ParsingException}
+import org.slf4j.LoggerFactory
 
 /**
  * A MessageBodyReader/Writer which supports reading and writing JValue
@@ -21,10 +22,16 @@ import com.codahale.jerkson.{Json, ParsingException}
 @Provider
 @Consumes(Array(MediaType.APPLICATION_JSON))
 class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
+  private val logger = LoggerFactory.getLogger(classOf[JValueProvider])
+
   def writeTo(json: JValue, t: Class[_], genericType: Type, annotations: Array[Annotation],
               mediaType: MediaType, httpHeaders: MultivaluedMap[String, AnyRef],
               entityStream: OutputStream) {
-    Json.generate(json, entityStream)
+    try {
+      Json.generate(json, entityStream)
+    } catch {
+      case e => logger.error("Error encoding %s as JSON".format(json), e)
+    }
   }
 
   def isWriteable(t: Class[_], genericType: Type, annotations: Array[Annotation],
@@ -40,6 +47,10 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
         throw new WebApplicationException(Response.status(Status.BAD_REQUEST)
                                           .entity(e.getMessage)
                                           .build)
+      }
+      case e => {
+        logger.error("Error decoding JSON request entity", e)
+        throw e
       }
     }
   }
