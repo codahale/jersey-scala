@@ -1,8 +1,8 @@
 import sbt._
 
-class JerseyScala(info: ProjectInfo) extends DefaultProject(info)
-                                             with IdeaProject
-                                             with maven.MavenDependencies {
+class JerseyScalaProject(info: ProjectInfo) extends DefaultProject(info)
+                                                    with IdeaProject
+                                                    with maven.MavenDependencies {
   /**
    * Publish the source as well as the class files.
    */
