@@ -1,8 +1,8 @@
 import sbt._
 
-class JerseyScala(info: ProjectInfo) extends DefaultProject(info)
-                                             with IdeaProject
-                                             with maven.MavenDependencies {
+class JerseyScalaProject(info: ProjectInfo) extends DefaultProject(info)
+                                                    with IdeaProject
+                                                    with maven.MavenDependencies {
   /**
    * Publish the source as well as the class files.
    */
@@ -23,8 +23,8 @@ class JerseyScala(info: ProjectInfo) extends DefaultProject(info)
   /**
    * Dependencies
    */
-  val jerkson = "com.codahale" %% "jerkson" % "0.1.4"
-  val jerseyServer = "com.sun.jersey" % "jersey-server" % "1.5"
+  val jerkson = "com.codahale" %% "jerkson" % "0.1.6"
+  val jerseyServer = "com.sun.jersey" % "jersey-server" % "1.6"
   val slf4j = "org.slf4j" % "slf4j-api" % "1.6.1"
 
   /**

@@ -1,3 +1,8 @@
+v0.1.3: Mar 29 2011
+===================
+* Upgraded to jerkson 0.1.6
+* Upgraded to jersey 1.6
+
 v0.1.2: Jan 27 2011
 ===================
 * Upgraded to jersey 1.5 final
