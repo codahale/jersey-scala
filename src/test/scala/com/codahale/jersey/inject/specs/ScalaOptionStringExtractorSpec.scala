@@ -6,17 +6,17 @@ import com.codahale.jersey.inject.ScalaOptionStringExtractor
 
 object ScalaOptionStringExtractorSpec extends Spec {
   class `Extracting a parameter` {
-    val extractor = new ScalaOptionStringExtractor("name", "default")
+    private val extractor = new ScalaOptionStringExtractor("name", "default")
 
-    def `should have a name` {
+    def `should have a name` = {
       extractor.getName must beEqualTo("name")
     }
 
-    def `should have a default value` {
+    def `should have a default value` = {
       extractor.getDefaultStringValue must beEqualTo("default")
     }
 
-    def `should extract the first of a set of parameter values` {
+    def `should extract the first of a set of parameter values` = {
       val params = new MultivaluedMapImpl()
       params.add("name", "one")
       params.add("name", "two")
@@ -26,7 +26,7 @@ object ScalaOptionStringExtractorSpec extends Spec {
       result must beEqualTo(Some("one"))
     }
 
-    def `should use the default value if no parameter exists` {
+    def `should use the default value if no parameter exists` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
@@ -35,9 +35,9 @@ object ScalaOptionStringExtractorSpec extends Spec {
   }
 
   class `Extracting a parameter with no default value` {
-    val extractor = new ScalaOptionStringExtractor("name", null)
+    private val extractor = new ScalaOptionStringExtractor("name", null)
 
-    def `should return None` {
+    def `should return None` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]

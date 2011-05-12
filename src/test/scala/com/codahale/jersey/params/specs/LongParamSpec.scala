@@ -6,15 +6,15 @@ import com.codahale.jersey.params.LongParam
 
 object LongParamSpec extends Spec {
   class `A valid long parameter` {
-    val param = LongParam("40")
+    private val param = LongParam("40")
 
-    def `should have an int value` {
+    def `should have an int value` = {
       param.value must beEqualTo(40L)
     }
   }
 
   class `An invalid long parameter` {
-    def `should throw a WebApplicationException with an error message` {
+    def `should throw a WebApplicationException with an error message` = {
       LongParam("poop") must throwA[WebApplicationException].like {
          case e: WebApplicationException =>
           val response = e.getResponse

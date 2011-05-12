@@ -6,15 +6,15 @@ import javax.ws.rs.WebApplicationException
 
 object BooleanParamSpec extends Spec {
   class `A valid boolean parameter` {
-    val param = BooleanParam("true")
+    private val param = BooleanParam("true")
 
-    def `should have a boolean value` {
+    def `should have a boolean value` = {
       param.value must beTrue
     }
   }
 
   class `An invalid boolean parameter` {
-    def `should throw a WebApplicationException with an error message` {
+    def `should throw a WebApplicationException with an error message` = {
       BooleanParam("poop") must throwA[WebApplicationException].like {
          case e: WebApplicationException =>
           val response = e.getResponse

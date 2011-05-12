@@ -6,15 +6,15 @@ import javax.ws.rs.WebApplicationException
 
 object IntParamSpec extends Spec {
   class `A valid int parameter` {
-    val param = IntParam("40")
+    private val param = IntParam("40")
 
-    def `should have an int value` {
+    def `should have an int value` = {
       param.value must beEqualTo(40)
     }
   }
 
   class `An invalid int parameter` {
-    def `should throw a WebApplicationException with an error message` {
+    def `should throw a WebApplicationException with an error message` = {
       IntParam("poop") must throwA[WebApplicationException].like {
          case e: WebApplicationException =>
           val response = e.getResponse
