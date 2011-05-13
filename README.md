@@ -9,8 +9,8 @@ Jersey-Scala is a set of classes which add Scala interoperation to Jersey.
 Requirements
 ------------
 
-* Scala 2.8.1
-* Jerkson 0.1.6
+* Scala 2.8.1 or 2.9.0
+* Jerkson 0.2.1
 * Jersey 1.6
 * Slf4j API 1.6.1
 
@@ -21,7 +21,7 @@ How To Use
 **First**, specify Jersey-Scala as a dependency:
     
     val codaRepo = "Coda Hale's Repository" at "http://repo.codahale.com/"
-    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.3" withSources()
+    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.4"
 
 **Second**, write your resource classes:
     
