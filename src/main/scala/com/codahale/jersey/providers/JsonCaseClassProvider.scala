@@ -1,7 +1,6 @@
 package com.codahale.jersey.providers
 
 import scala.reflect.Manifest
-import java.io.{InputStream, OutputStream}
 import java.lang.annotation.Annotation
 import java.lang.reflect.Type
 import javax.ws.rs.{WebApplicationException, Produces, Consumes}
@@ -11,6 +10,7 @@ import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import javax.ws.rs.ext.Provider
 import com.codahale.jerkson.{ParsingException, Json}
 import org.slf4j.LoggerFactory
+import java.io.{IOException, InputStream, OutputStream}
 
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
@@ -24,6 +24,7 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
     try {
       Json.generate(json, entityStream)
     } catch {
+      case e: IOException => logger.debug("Error writing to stream", e)
       case e => logger.error("Error encoding %s as JSON".format(json), e)
     }
   }
@@ -46,7 +47,10 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
                                           .build)
       }
       case e => {
-        logger.error("Error decoding JSON request entity", e)
+        e match {
+          case e: IOException => logger.debug("Error reading from stream", e)
+          case _ => logger.error("Error decoding JSON request entity", e)
+        }
         throw e
       }
     }
