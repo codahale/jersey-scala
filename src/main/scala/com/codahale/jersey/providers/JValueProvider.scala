@@ -2,7 +2,6 @@ package com.codahale.jersey.providers
 
 import java.lang.annotation.Annotation
 import java.lang.reflect.Type
-import java.io.{InputStream, OutputStream}
 import javax.ws.rs.{WebApplicationException, Consumes}
 import javax.ws.rs.core.{Response, MultivaluedMap, MediaType}
 import javax.ws.rs.core.Response.Status
@@ -11,14 +10,8 @@ import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import com.codahale.jerkson.AST.JValue
 import com.codahale.jerkson.{Json, ParsingException}
 import org.slf4j.LoggerFactory
+import java.io.{IOException, EOFException, InputStream, OutputStream}
 
-/**
- * A MessageBodyReader/Writer which supports reading and writing JValue
- * instances. Supports writing "application/json+pretty" output, which
- * pretty-prints the JSON values.
- *
- * @author coda
- */
 @Provider
 @Consumes(Array(MediaType.APPLICATION_JSON))
 class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
@@ -30,6 +23,7 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
     try {
       Json.generate(json, entityStream)
     } catch {
+      case e: IOException => logger.debug("Error writing to stream", e)
       case e => logger.error("Error encoding %s as JSON".format(json), e)
     }
   }
@@ -39,7 +33,7 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
 
   def readFrom(t: Class[JValue], genericType: Type, annotations: Array[Annotation],
                mediaType: MediaType, httpHeaders: MultivaluedMap[String, String],
-               entityStream: InputStream) = {
+               entityStream: InputStream): JValue = {
     try {
       Json.parse[JValue](entityStream)
     } catch {
@@ -49,7 +43,10 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
                                           .build)
       }
       case e => {
-        logger.error("Error decoding JSON request entity", e)
+        e match {
+          case _: IOException => logger.debug("Error writing to stream", e)
+          case _ => logger.error("Error decoding JSON request entity", e)
+        }
         throw e
       }
     }
