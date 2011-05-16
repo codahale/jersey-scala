@@ -1,3 +1,9 @@
+v0.1.5: May 16 2011
+===================
+
+* Downgraded logging of `IOException`s while parsing and generating JSON to
+  `debug`.
+
 v0.1.4: May 12 2011
 ===================
 

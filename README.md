@@ -21,7 +21,7 @@ How To Use
 **First**, specify Jersey-Scala as a dependency:
     
     val codaRepo = "Coda Hale's Repository" at "http://repo.codahale.com/"
-    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.4"
+    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.5"
 
 **Second**, write your resource classes:
     
