@@ -4,7 +4,7 @@ import com.codahale.simplespec.Spec
 import com.codahale.jersey.params.BooleanParam
 import javax.ws.rs.WebApplicationException
 
-object BooleanParamSpec extends Spec {
+class BooleanParamSpec extends Spec {
   class `A valid boolean parameter` {
     private val param = BooleanParam("true")
 

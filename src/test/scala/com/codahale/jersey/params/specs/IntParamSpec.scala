@@ -4,7 +4,7 @@ import com.codahale.simplespec.Spec
 import com.codahale.jersey.params.IntParam
 import javax.ws.rs.WebApplicationException
 
-object IntParamSpec extends Spec {
+class IntParamSpec extends Spec {
   class `A valid int parameter` {
     private val param = IntParam("40")
 

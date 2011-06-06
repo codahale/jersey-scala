@@ -4,7 +4,7 @@ import com.codahale.jersey.inject.ScalaCollectionStringReaderExtractor
 import com.codahale.simplespec.Spec
 import com.sun.jersey.core.util.MultivaluedMapImpl
 
-object ScalaCollectionStringReaderExtractorSpec extends Spec {
+class ScalaCollectionStringReaderExtractorSpec extends Spec {
   class `Extracting a parameter` {
     private val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", "default", Set)
 

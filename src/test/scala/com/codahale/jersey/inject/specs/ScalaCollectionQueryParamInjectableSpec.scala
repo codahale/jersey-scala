@@ -7,7 +7,7 @@ import com.sun.jersey.api.core.{ExtendedUriInfo, HttpContext}
 import javax.ws.rs.core.MultivaluedMap
 import org.specs2.mock.Mockito
 
-object ScalaCollectionQueryParamInjectableSpec extends Spec with Mockito {
+class ScalaCollectionQueryParamInjectableSpec extends Spec with Mockito {
   // TODO: Aug 17, 2010 <coda> -- test error handling
 
   private val extractor = mock[MultivaluedParameterExtractor]

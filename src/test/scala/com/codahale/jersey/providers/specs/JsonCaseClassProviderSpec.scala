@@ -9,7 +9,7 @@ import javax.ws.rs.WebApplicationException
 case class Role(name: String)
 case class Person(name: String, age: Int, roles: List[Role])
 
-object JsonCaseClassProviderSpec extends Spec {
+class JsonCaseClassProviderSpec extends Spec {
   private val provider = new JsonCaseClassProvider
   private val entity = """{"name":"Coda","age":29,"roles":[{"name":"badass"},{"name":"beardo"}]}"""
   private val coda = Person("Coda", 29, List(Role("badass"), Role("beardo")))

@@ -4,7 +4,7 @@ import com.codahale.simplespec.Spec
 import javax.ws.rs.WebApplicationException
 import com.codahale.jersey.params.LongParam
 
-object LongParamSpec extends Spec {
+class LongParamSpec extends Spec {
   class `A valid long parameter` {
     private val param = LongParam("40")
 

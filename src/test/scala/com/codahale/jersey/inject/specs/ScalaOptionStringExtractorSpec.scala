@@ -4,7 +4,7 @@ import com.codahale.simplespec.Spec
 import com.sun.jersey.core.util.MultivaluedMapImpl
 import com.codahale.jersey.inject.ScalaOptionStringExtractor
 
-object ScalaOptionStringExtractorSpec extends Spec {
+class ScalaOptionStringExtractorSpec extends Spec {
   class `Extracting a parameter` {
     private val extractor = new ScalaOptionStringExtractor("name", "default")
 
