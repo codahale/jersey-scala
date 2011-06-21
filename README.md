@@ -9,8 +9,8 @@ Jersey-Scala is a set of classes which add Scala interoperation to Jersey.
 Requirements
 ------------
 
-* Scala 2.8.1 or 2.9.0
-* Jerkson 0.2.2
+* Scala 2.8.1 or 2.9.0-1
+* Jerkson 0.3.2
 * Jersey 1.7
 * Slf4j API 1.6.1
 
@@ -19,18 +19,25 @@ How To Use
 ----------
 
 **First**, specify Jersey-Scala as a dependency:
-    
-    val codaRepo = "Coda Hale's Repository" at "http://repo.codahale.com/"
-    val jerseyScala = "com.codahale" %% "jersey-scala" % "0.1.6"
+
+```xml
+<dependency>
+    <groupId>com.codahale</groupId>
+    <artifactId>jersey-scala_${scala.version}</artifactId>
+    <version>0.1.7</version>
+</dependency>
+```
 
 **Second**, write your resource classes:
-    
-    @Path("/things")
-    @Produces("text/plain")
-    class Things {
-      @GET
-      def getAThing(@QueryParam("name") names: Set[String]) = "I found: " + names.mkString(", ")
-    }
+
+```scala
+@Path("/things")
+@Produces("text/plain")
+class Things {
+  @GET
+  def getAThing(@QueryParam("name") names: Set[String]) = "I found: " + names.mkString(", ")
+}
+```
     
 
 
@@ -42,6 +49,9 @@ What All This Supports
 * `AST.JValue` request and response entities.
 * `JsonNode` request and response entities.
 * Case class (i.e., `Product` instances) JSON request and response entities.
+* `Array[A]` request and response entities. (Due to the JVM's type erasure and
+  mismatches between Scala and Java type signatures, this is the only "generic"
+  class supported since `Array` type parameters are reified.)
 
 
 License
