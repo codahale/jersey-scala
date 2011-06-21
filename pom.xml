@@ -6,7 +6,7 @@
 
     <groupId>com.codahale</groupId>
     <artifactId>jersey-scala_2.9.0-1</artifactId>
-    <version>0.1.7-SNAPSHOT</version>
+    <version>0.1.7</version>
     <name>Jersey Support for Scala ${scala.version}</name>
 
     <properties>

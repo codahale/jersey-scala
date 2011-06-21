@@ -1,3 +1,10 @@
+v0.1.7: Jun 20 2011
+===================
+
+* Added support for `Array[A]` instances.
+* Upgraded to Jerkson 0.3.2.
+* Started building for 2.9.0-1 instead of 2.9.0.
+
 v0.1.6: May 23 2011
 ===================
 
