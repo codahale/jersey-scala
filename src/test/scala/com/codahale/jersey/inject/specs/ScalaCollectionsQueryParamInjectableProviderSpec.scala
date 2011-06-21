@@ -9,7 +9,7 @@ import com.sun.jersey.core.util.MultivaluedMapImpl
 import com.sun.jersey.api.core.{HttpContext, ExtendedUriInfo}
 import org.specs2.mock.Mockito
 
-object ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockito {
+class ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockito {
   class `A Scala collections query param injectable provider` {
     private val httpContext = mock[HttpContext]
     private val uriInfo = mock[ExtendedUriInfo]

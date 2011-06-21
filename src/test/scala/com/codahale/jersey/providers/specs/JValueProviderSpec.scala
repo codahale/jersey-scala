@@ -8,7 +8,7 @@ import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
 import org.specs2.mock.Mockito
 
-object JValueProviderSpec extends Spec with Mockito {
+class JValueProviderSpec extends Spec with Mockito {
   class `A JValue instance` {
     private val value = mock[JValue]
     private val provider = new JValueProvider
