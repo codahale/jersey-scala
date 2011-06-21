@@ -10,6 +10,7 @@ import com.codahale.jerkson.{ParsingException, Json}
 import javax.ws.rs.{WebApplicationException, Consumes, Produces}
 import javax.ws.rs.core.{Response, MultivaluedMap, MediaType}
 import javax.ws.rs.core.Response.Status
+import scala.reflect.Manifest
 
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
