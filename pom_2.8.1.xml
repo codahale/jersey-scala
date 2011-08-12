@@ -6,7 +6,7 @@
 
     <groupId>com.codahale</groupId>
     <artifactId>jersey-scala_2.8.1</artifactId>
-    <version>0.1.7</version>
+    <version>0.1.8-SNAPSHOT</version>
     <name>Jersey Support for Scala ${scala.version}</name>
 
     <properties>
@@ -78,12 +78,12 @@
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>jerkson_${scala.version}</artifactId>
-            <version>0.3.2</version>
+            <version>0.4.0</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>1.7</version>
+            <version>1.8</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -93,7 +93,13 @@
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>simplespec_${scala.version}</artifactId>
-            <version>0.3.4</version>
+            <version>0.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

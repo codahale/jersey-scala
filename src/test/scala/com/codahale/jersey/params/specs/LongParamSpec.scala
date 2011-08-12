@@ -1,20 +1,21 @@
 package com.codahale.jersey.params.specs
 
 import com.codahale.simplespec.Spec
-import javax.ws.rs.WebApplicationException
+import com.codahale.simplespec.annotation.test
 import com.codahale.jersey.params.LongParam
+import javax.ws.rs.WebApplicationException
 
 class LongParamSpec extends Spec {
   class `A valid long parameter` {
     private val param = LongParam("40")
 
-    def `should have an int value` = {
+    @test def `has an int value` = {
       param.value must beEqualTo(40L)
     }
   }
 
   class `An invalid long parameter` {
-    def `should throw a WebApplicationException with an error message` = {
+    @test def `throws a WebApplicationException with an error message` = {
       LongParam("poop") must throwA[WebApplicationException].like {
          case e: WebApplicationException =>
           val response = e.getResponse
