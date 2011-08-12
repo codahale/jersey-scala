@@ -1,20 +1,21 @@
 package com.codahale.jersey.params.specs
 
 import com.codahale.simplespec.Spec
+import com.codahale.simplespec.annotation.test
 import com.codahale.jersey.params.IntParam
 import javax.ws.rs.WebApplicationException
 
 class IntParamSpec extends Spec {
   class `A valid int parameter` {
-    private val param = IntParam("40")
+    val param = IntParam("40")
 
-    def `should have an int value` = {
+    @test def `has an int value` = {
       param.value must beEqualTo(40)
     }
   }
 
   class `An invalid int parameter` {
-    def `should throw a WebApplicationException with an error message` = {
+    @test def `throws a WebApplicationException with an error message` = {
       IntParam("poop") must throwA[WebApplicationException].like {
          case e: WebApplicationException =>
           val response = e.getResponse

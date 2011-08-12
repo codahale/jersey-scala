@@ -1,22 +1,23 @@
 package com.codahale.jersey.inject.specs
 
 import com.codahale.simplespec.Spec
+import com.codahale.simplespec.annotation.test
 import com.sun.jersey.core.util.MultivaluedMapImpl
 import com.codahale.jersey.inject.ScalaOptionStringExtractor
 
 class ScalaOptionStringExtractorSpec extends Spec {
   class `Extracting a parameter` {
-    private val extractor = new ScalaOptionStringExtractor("name", "default")
+    val extractor = new ScalaOptionStringExtractor("name", "default")
 
-    def `should have a name` = {
+    @test def `has a name` = {
       extractor.getName must beEqualTo("name")
     }
 
-    def `should have a default value` = {
+    @test def `has a default value` = {
       extractor.getDefaultStringValue must beEqualTo("default")
     }
 
-    def `should extract the first of a set of parameter values` = {
+    @test def `extracts the first of a set of parameter values` = {
       val params = new MultivaluedMapImpl()
       params.add("name", "one")
       params.add("name", "two")
@@ -26,7 +27,7 @@ class ScalaOptionStringExtractorSpec extends Spec {
       result must beEqualTo(Some("one"))
     }
 
-    def `should use the default value if no parameter exists` = {
+    @test def `uses the default value if no parameter exists` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
@@ -35,9 +36,9 @@ class ScalaOptionStringExtractorSpec extends Spec {
   }
 
   class `Extracting a parameter with no default value` {
-    private val extractor = new ScalaOptionStringExtractor("name", null)
+    val extractor = new ScalaOptionStringExtractor("name", null)
 
-    def `should return None` = {
+    @test def `returns None` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]

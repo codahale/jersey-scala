@@ -5,27 +5,28 @@ import javax.ws.rs.core.MediaType
 import com.codahale.jersey.providers.JsonCaseClassProvider
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import javax.ws.rs.WebApplicationException
+import com.codahale.simplespec.annotation.test
 
 case class Role(name: String)
 case class Person(name: String, age: Int, roles: List[Role])
 
 class JsonCaseClassProviderSpec extends Spec {
-  private val provider = new JsonCaseClassProvider
-  private val entity = """{"name":"Coda","age":29,"roles":[{"name":"badass"},{"name":"beardo"}]}"""
-  private val coda = Person("Coda", 29, List(Role("badass"), Role("beardo")))
+  val provider = new JsonCaseClassProvider
+  val entity = """{"name":"Coda","age":29,"roles":[{"name":"badass"},{"name":"beardo"}]}"""
+  val coda = Person("Coda", 29, List(Role("badass"), Role("beardo")))
 
   class `A case class instance` {
-    def `should be writable` = {
+    @test def `is writable` = {
       provider.isWriteable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
     }
 
-    def `should be readable` = {
+    @test def `is readable` = {
       provider.isReadable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
     }
   }
 
   class `Parsing an application/json request entity` {
-    def `should return a case class instance` = {
+    @test def `returns a case class instance` = {
       val value = provider.readFrom(classOf[Person].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes))
 
       value must beEqualTo(coda)
@@ -33,10 +34,10 @@ class JsonCaseClassProviderSpec extends Spec {
   }
 
   class `Parsing an malformed application/json request entity` {
-    private val entity = "{\"yay\": 1"
-    private val provider = new JsonCaseClassProvider
+    val entity = "{\"yay\": 1"
+    val provider = new JsonCaseClassProvider
 
-    def `should throw a 400 Bad Request WebApplicationException` = {
+    @test def `throws a 400 Bad Request WebApplicationException` = {
       provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes)) must throwA[WebApplicationException].like {
         case e: WebApplicationException => {
           val response = e.getResponse
@@ -48,10 +49,10 @@ class JsonCaseClassProviderSpec extends Spec {
   }
 
   class `Parsing an invalid application/json request entity` {
-    private val entity = "{\"yay\": 1}"
-    private val provider = new JsonCaseClassProvider
+    val entity = "{\"yay\": 1}"
+    val provider = new JsonCaseClassProvider
 
-    def `should throw a 400 Bad Request WebApplicationException` = {
+    @test def `throws a 400 Bad Request WebApplicationException` = {
       provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes)) must throwA[WebApplicationException].like {
         case e: WebApplicationException => {
           val response = e.getResponse
@@ -63,7 +64,7 @@ class JsonCaseClassProviderSpec extends Spec {
   }
 
   class `Rendering an application/json response entity` {
-    def `should produce a compact JSON object` = {
+    @test def `produces a compact JSON object` = {
       val output = new ByteArrayOutputStream
       provider.writeTo(coda, null, null, null, MediaType.APPLICATION_JSON_TYPE, null, output)
 

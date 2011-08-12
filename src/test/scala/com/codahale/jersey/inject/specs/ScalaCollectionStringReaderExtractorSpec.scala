@@ -1,22 +1,23 @@
 package com.codahale.jersey.inject.specs
 
-import com.codahale.jersey.inject.ScalaCollectionStringReaderExtractor
 import com.codahale.simplespec.Spec
+import com.codahale.simplespec.annotation.test
+import com.codahale.jersey.inject.ScalaCollectionStringReaderExtractor
 import com.sun.jersey.core.util.MultivaluedMapImpl
 
 class ScalaCollectionStringReaderExtractorSpec extends Spec {
   class `Extracting a parameter` {
-    private val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", "default", Set)
+    val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", "default", Set)
 
-    def `should have a name` = {
+    @test def `has a name` = {
       extractor.getName must beEqualTo("name")
     }
 
-    def `should have a default value` = {
+    @test def `has a default value` = {
       extractor.getDefaultStringValue must beEqualTo("default")
     }
 
-    def `should extract a set of parameter values` = {
+    @test def `extracts a set of parameter values` = {
       val params = new MultivaluedMapImpl()
       params.add("name", "one")
       params.add("name", "two")
@@ -26,7 +27,7 @@ class ScalaCollectionStringReaderExtractorSpec extends Spec {
       result must beEqualTo(Set("one", "two", "three"))
     }
 
-    def `should use the default value if no parameter exists` = {
+    @test def `uses the default value if no parameter exists` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Set[String]]
@@ -35,9 +36,9 @@ class ScalaCollectionStringReaderExtractorSpec extends Spec {
   }
 
   class `Extracting a parameter with no default value` {
-    private val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", null, Set)
+    val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", null, Set)
 
-    def `should return an empty collection` = {
+    @test def `returns an empty collection` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Set[String]]
