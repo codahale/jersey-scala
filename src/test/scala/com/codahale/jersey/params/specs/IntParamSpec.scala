@@ -10,18 +10,21 @@ class IntParamSpec extends Spec {
     val param = IntParam("40")
 
     @test def `has an int value` = {
-      param.value must beEqualTo(40)
+      param.value.must(be(40))
     }
   }
 
   class `An invalid int parameter` {
     @test def `throws a WebApplicationException with an error message` = {
-      IntParam("poop") must throwA[WebApplicationException].like {
-         case e: WebApplicationException =>
+      evaluating {
+        IntParam("poop")
+      }.must(throwAnExceptionLike {
+        case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Invalid parameter: poop (Must be an integer value.)")
-      }
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Invalid parameter: poop (Must be an integer value.)"))
+        }
+      })
     }
   }
 }

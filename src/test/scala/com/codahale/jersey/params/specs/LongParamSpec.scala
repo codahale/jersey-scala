@@ -10,18 +10,21 @@ class LongParamSpec extends Spec {
     private val param = LongParam("40")
 
     @test def `has an int value` = {
-      param.value must beEqualTo(40L)
+      param.value.must(be(40L))
     }
   }
 
   class `An invalid long parameter` {
     @test def `throws a WebApplicationException with an error message` = {
-      LongParam("poop") must throwA[WebApplicationException].like {
-         case e: WebApplicationException =>
+      evaluating {
+        LongParam("poop")
+      }.must(throwAnExceptionLike {
+        case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Invalid parameter: poop (Must be an integer value.)")
-      }
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Invalid parameter: poop (Must be an integer value.)"))
+        }
+      })
     }
   }
 }

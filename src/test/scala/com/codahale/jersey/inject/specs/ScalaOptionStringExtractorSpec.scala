@@ -10,11 +10,11 @@ class ScalaOptionStringExtractorSpec extends Spec {
     val extractor = new ScalaOptionStringExtractor("name", "default")
 
     @test def `has a name` = {
-      extractor.getName must beEqualTo("name")
+      extractor.getName.must(be("name"))
     }
 
     @test def `has a default value` = {
-      extractor.getDefaultStringValue must beEqualTo("default")
+      extractor.getDefaultStringValue.must(be("default"))
     }
 
     @test def `extracts the first of a set of parameter values` = {
@@ -24,14 +24,14 @@ class ScalaOptionStringExtractorSpec extends Spec {
       params.add("name", "three")
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
-      result must beEqualTo(Some("one"))
+      result.must(be(Some("one")))
     }
 
     @test def `uses the default value if no parameter exists` = {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
-      result must beEqualTo(Some("default"))
+      result.must(be(Some("default")))
     }
   }
 
@@ -42,7 +42,7 @@ class ScalaOptionStringExtractorSpec extends Spec {
       val params = new MultivaluedMapImpl()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
-      result must beEqualTo(None)
+      result.must(be(None))
     }
   }
 }

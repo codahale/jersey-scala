@@ -17,11 +17,11 @@ class JsonCaseClassProviderSpec extends Spec {
 
   class `A case class instance` {
     @test def `is writable` = {
-      provider.isWriteable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
+      provider.isWriteable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
 
     @test def `is readable` = {
-      provider.isReadable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
+      provider.isReadable(coda.getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
   }
 
@@ -29,7 +29,7 @@ class JsonCaseClassProviderSpec extends Spec {
     @test def `returns a case class instance` = {
       val value = provider.readFrom(classOf[Person].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes))
 
-      value must beEqualTo(coda)
+      value.must(be(coda))
     }
   }
 
@@ -38,13 +38,15 @@ class JsonCaseClassProviderSpec extends Spec {
     val provider = new JsonCaseClassProvider
 
     @test def `throws a 400 Bad Request WebApplicationException` = {
-      provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes)) must throwA[WebApplicationException].like {
+      evaluating {
+        provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes))
+      }.must(throwAnExceptionLike {
         case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Malformed JSON. Unexpected end-of-input: expected close marker for OBJECT at character offset 26.")
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Malformed JSON. Unexpected end-of-input: expected close marker for OBJECT at character offset 26."))
         }
-      }
+      })
     }
   }
 
@@ -53,13 +55,15 @@ class JsonCaseClassProviderSpec extends Spec {
     val provider = new JsonCaseClassProvider
 
     @test def `throws a 400 Bad Request WebApplicationException` = {
-      provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes)) must throwA[WebApplicationException].like {
+      evaluating {
+        provider.readFrom(classOf[Role].asInstanceOf[Class[Product]], null, null, null, null, new ByteArrayInputStream(entity.getBytes))
+      }.must(throwAnExceptionLike {
         case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Invalid JSON. Needed [name], but found [yay].")
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Invalid JSON. Needed [name], but found [yay]."))
         }
-      }
+      })
     }
   }
 
@@ -68,7 +72,7 @@ class JsonCaseClassProviderSpec extends Spec {
       val output = new ByteArrayOutputStream
       provider.writeTo(coda, null, null, null, MediaType.APPLICATION_JSON_TYPE, null, output)
 
-      output.toString must beEqualTo(entity)
+      output.toString.must(be(entity))
     }
   }
 }

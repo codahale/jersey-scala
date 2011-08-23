@@ -10,18 +10,21 @@ class BooleanParamSpec extends Spec {
     val param = BooleanParam("true")
 
     @test def `has a boolean value` = {
-      param.value must beTrue
+      param.value.must(be(true))
     }
   }
 
   class `An invalid boolean parameter` {
     @test def `throws a WebApplicationException with an error message` = {
-      BooleanParam("poop") must throwA[WebApplicationException].like {
-         case e: WebApplicationException =>
+      evaluating {
+        BooleanParam("poop")
+      }.must(throwAnExceptionLike {
+        case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Invalid parameter: poop (Must be \"true\" or \"false\".)")
-      }
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Invalid parameter: poop (Must be \"true\" or \"false\".)"))
+        }
+      })
     }
   }
 }

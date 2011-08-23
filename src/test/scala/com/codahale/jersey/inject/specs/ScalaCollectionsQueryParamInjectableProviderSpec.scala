@@ -8,9 +8,8 @@ import com.sun.jersey.core.spi.component.{ComponentContext, ComponentScope}
 import com.codahale.jersey.inject.{ScalaCollectionQueryParamInjectable, ScalaCollectionsQueryParamInjectableProvider}
 import com.sun.jersey.core.util.MultivaluedMapImpl
 import com.sun.jersey.api.core.{HttpContext, ExtendedUriInfo}
-import org.specs2.mock.Mockito
 
-class ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockito {
+class ScalaCollectionsQueryParamInjectableProviderSpec extends Spec {
   class `A Scala collections query param injectable provider` {
     val httpContext = mock[HttpContext]
     val uriInfo = mock[ExtendedUriInfo]
@@ -29,49 +28,49 @@ class ScalaCollectionsQueryParamInjectableProviderSpec extends Spec with Mockito
 
 
     @test def `has a per-request scope` = {
-      provider.getScope must beEqualTo(ComponentScope.PerRequest)
+      provider.getScope.must(be(ComponentScope.PerRequest))
     }
 
     @test def `returns an injectable for Seq instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[Seq[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(Seq("one", "two", "three"))
+      injectable.getValue(httpContext).must(be(Seq("one", "two", "three")))
     }
 
     @test def `returns an injectable for List instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[List[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(List("one", "two", "three"))
+      injectable.getValue(httpContext).must(be(List("one", "two", "three")))
     }
 
     @test def `returns an injectable for Vector instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[Vector[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(Vector("one", "two", "three"))
+      injectable.getValue(httpContext).must(be(Vector("one", "two", "three")))
     }
 
     @test def `returns an injectable for IndexedSeq instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[IndexedSeq[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(IndexedSeq("one", "two", "three"))
+      injectable.getValue(httpContext).must(be(IndexedSeq("one", "two", "three")))
     }
 
     @test def `return an injectable for Set instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[Set[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(Set("one", "two", "three"))
+      injectable.getValue(httpContext).must(be(Set("one", "two", "three")))
     }
 
     @test def `returns an injectable for Option instances` = {
       val param = new Parameter(Array(), null, null, "name", null, classOf[Option[String]], false, "default")
       val injectable = provider.getInjectable(context, queryParam, param).asInstanceOf[ScalaCollectionQueryParamInjectable]
 
-      injectable.getValue(httpContext) must beEqualTo(Some("one"))
+      injectable.getValue(httpContext).must(be(Some("one")))
     }
   }
 }

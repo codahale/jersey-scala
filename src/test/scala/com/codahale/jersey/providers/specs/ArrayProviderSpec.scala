@@ -12,11 +12,11 @@ class ArrayProviderSpec extends Spec {
 
   class `An array of ints` {
     @test def `is writable` = {
-      provider.isWriteable(Array.empty[Int].getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
+      provider.isWriteable(Array.empty[Int].getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
 
     @test def `is readable` = {
-      provider.isReadable(Array.empty[Int].getClass, null, null, MediaType.APPLICATION_JSON_TYPE) must beTrue
+      provider.isReadable(Array.empty[Int].getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
   }
 
@@ -24,7 +24,7 @@ class ArrayProviderSpec extends Spec {
     val entity = new ByteArrayInputStream("[1, 2, 3]".getBytes)
 
     @test def `returns an array of the given type` = {
-      provider.readFrom(classOf[Array[Int]], null, null, null, null, entity).toList must beEqualTo(List(1, 2, 3))
+      provider.readFrom(classOf[Array[Int]], null, null, null, null, entity).must(be(Array(1, 2, 3)))
     }
   }
 
@@ -32,13 +32,15 @@ class ArrayProviderSpec extends Spec {
     val entity = new ByteArrayInputStream("[1, 2".getBytes)
 
     @test def `throws a 400 Bad Request WebApplicationException` = {
-      provider.readFrom(classOf[Array[Int]], null, null, null, null, entity) must throwA[WebApplicationException].like {
+      evaluating {
+        provider.readFrom(classOf[Array[Int]], null, null, null, null, entity)
+      }.must(throwAnExceptionLike {
         case e: WebApplicationException => {
           val response = e.getResponse
-          response.getStatus must beEqualTo(400)
-          response.getEntity must beEqualTo("Malformed JSON. Unexpected end-of-input: expected close marker for ARRAY at character offset 14.")
+          response.getStatus.must(be(400))
+          response.getEntity.must(be("Malformed JSON. Unexpected end-of-input: expected close marker for ARRAY at character offset 14."))
         }
-      }
+      })
     }
   }
 
@@ -47,7 +49,7 @@ class ArrayProviderSpec extends Spec {
       val output = new ByteArrayOutputStream
       provider.writeTo(Array(1, 2, 3), null, null, null, MediaType.APPLICATION_JSON_TYPE, null, output)
 
-      output.toString must beEqualTo("[1,2,3]")
+      output.toString.must(be("[1,2,3]"))
     }
   }
 }
