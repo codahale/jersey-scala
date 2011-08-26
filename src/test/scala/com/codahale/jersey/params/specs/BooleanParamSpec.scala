@@ -1,7 +1,7 @@
 package com.codahale.jersey.params.specs
 
 import com.codahale.simplespec.Spec
-import com.codahale.simplespec.annotation.test
+import org.junit.Test
 import com.codahale.jersey.params.BooleanParam
 import javax.ws.rs.WebApplicationException
 
@@ -9,13 +9,13 @@ class BooleanParamSpec extends Spec {
   class `A valid boolean parameter` {
     val param = BooleanParam("true")
 
-    @test def `has a boolean value` = {
+    @Test def `has a boolean value` = {
       param.value.must(be(true))
     }
   }
 
   class `An invalid boolean parameter` {
-    @test def `throws a WebApplicationException with an error message` = {
+    @Test def `throws a WebApplicationException with an error message` = {
       evaluating {
         BooleanParam("poop")
       }.must(throwAnExceptionLike {

@@ -1,7 +1,7 @@
 package com.codahale.jersey.inject.specs
 
 import com.codahale.simplespec.Spec
-import com.codahale.simplespec.annotation.test
+import org.junit.Test
 import com.codahale.jersey.inject.ScalaCollectionQueryParamInjectable
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import com.sun.jersey.api.core.{ExtendedUriInfo, HttpContext}
@@ -23,7 +23,7 @@ class ScalaCollectionQueryParamInjectableSpec extends Spec {
     val injectable = new ScalaCollectionQueryParamInjectable(extractor, true)
     uriInfo.getQueryParameters(true) returns params
 
-    @test def `extracts the query parameters` = {
+    @Test def `extracts the query parameters` = {
       val e = injectable.getValue(context)
 
       e.must(be(extracted))
@@ -34,7 +34,7 @@ class ScalaCollectionQueryParamInjectableSpec extends Spec {
     val injectable = new ScalaCollectionQueryParamInjectable(extractor, false)
     uriInfo.getQueryParameters(false) returns params
 
-    @test def `extracts the query parameters` = {
+    @Test def `extracts the query parameters` = {
       val e = injectable.getValue(context)
 
       e.must(be(extracted))

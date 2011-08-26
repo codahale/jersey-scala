@@ -6,18 +6,18 @@ import javax.ws.rs.core.MediaType
 import com.codahale.jerkson.AST._
 import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
-import com.codahale.simplespec.annotation.test
+import org.junit.Test
 
 class JValueProviderSpec extends Spec {
   class `A JValue instance` {
     val value = mock[JValue]
     val provider = new JValueProvider
 
-    @test def `is writable` = {
+    @Test def `is writable` = {
       provider.isWriteable(value.getClass, null, null, null).must(be(true))
     }
 
-    @test def `is readable` = {
+    @Test def `is readable` = {
       provider.isReadable(value.getClass, null, null, null).must(be(true))
     }
   }
@@ -26,7 +26,7 @@ class JValueProviderSpec extends Spec {
     val entity = "{\"yay\": 1}"
     val provider = new JValueProvider
 
-    @test def `returns a JValue instance` = {
+    @Test def `returns a JValue instance` = {
       val value = provider.readFrom(null, null, null, null, null, new ByteArrayInputStream(entity.getBytes))
 
       value.must(be(JObject(List(JField("yay", JInt(1))))))
@@ -37,7 +37,7 @@ class JValueProviderSpec extends Spec {
     val entity = "{\"yay\": 1"
     val provider = new JValueProvider
 
-    @test def `throws a 400 Bad Request WebApplicationException` = {
+    @Test def `throws a 400 Bad Request WebApplicationException` = {
       evaluating {
         provider.readFrom(null, null, null, null, null, new ByteArrayInputStream(entity.getBytes))
       }.must(throwAnExceptionLike {
@@ -54,7 +54,7 @@ class JValueProviderSpec extends Spec {
     val provider = new JValueProvider
     val json = JObject(List(JField("yay", JInt(1))))
 
-    @test def `produces a compact JSON object` = {
+    @Test def `produces a compact JSON object` = {
       val output = new ByteArrayOutputStream
       provider.writeTo(json, null, null, null, MediaType.APPLICATION_JSON_TYPE, null, output)
       output.toString.must(be("{\"yay\":1}"))
