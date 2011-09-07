@@ -31,7 +31,7 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
 
   def isWriteable(t: Class[_], genericType: Type, annotations: Array[Annotation],
                   mediaType: MediaType) =
-    mediaType == MediaType.APPLICATION_JSON_TYPE &&
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
             classOf[Product].isAssignableFrom(t)
 
   def readFrom(t: Class[Product], genericType: Type,
@@ -58,6 +58,6 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
 
   def isReadable(t: Class[_], genericType: Type, annotations: Array[Annotation],
                  mediaType: MediaType): Boolean =
-    mediaType == MediaType.APPLICATION_JSON_TYPE &&
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
             classOf[Product].isAssignableFrom(t)
 }
