@@ -10,15 +10,19 @@ import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import com.codahale.jerkson.AST.JValue
 import com.codahale.jerkson.{Json, ParsingException}
 import org.slf4j.LoggerFactory
-import java.io.{IOException, EOFException, InputStream, OutputStream}
+import java.io.{IOException, InputStream, OutputStream}
 
 @Provider
 @Consumes(Array(MediaType.APPLICATION_JSON))
 class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
   private val logger = LoggerFactory.getLogger(classOf[JValueProvider])
 
-  def writeTo(json: JValue, t: Class[_], genericType: Type, annotations: Array[Annotation],
-              mediaType: MediaType, httpHeaders: MultivaluedMap[String, AnyRef],
+  def writeTo(json: JValue,
+              t: Class[_],
+              genericType: Type,
+              annotations: Array[Annotation],
+              mediaType: MediaType,
+              httpHeaders: MultivaluedMap[String, AnyRef],
               entityStream: OutputStream) {
     try {
       Json.generate(json, entityStream)
@@ -28,11 +32,18 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
     }
   }
 
-  def isWriteable(t: Class[_], genericType: Type, annotations: Array[Annotation],
-                  mediaType: MediaType) = classOf[JValue].isAssignableFrom(t)
+  def isWriteable(t: Class[_],
+                  genericType: Type,
+                  annotations: Array[Annotation],
+                  mediaType: MediaType) =
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
+      classOf[JValue].isAssignableFrom(t)
 
-  def readFrom(t: Class[JValue], genericType: Type, annotations: Array[Annotation],
-               mediaType: MediaType, httpHeaders: MultivaluedMap[String, String],
+  def readFrom(t: Class[JValue],
+               genericType: Type,
+               annotations: Array[Annotation],
+               mediaType: MediaType,
+               httpHeaders: MultivaluedMap[String, String],
                entityStream: InputStream): JValue = {
     try {
       Json.parse[JValue](entityStream)
@@ -52,6 +63,10 @@ class JValueProvider extends AbstractMessageReaderWriterProvider[JValue] {
     }
   }
 
-  def isReadable(t: Class[_], genericType: Type, annotations: Array[Annotation],
-                 mediaType: MediaType) = classOf[JValue].isAssignableFrom(t)
+  def isReadable(t: Class[_],
+                 genericType: Type,
+                 annotations: Array[Annotation],
+                 mediaType: MediaType) =
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
+      classOf[JValue].isAssignableFrom(t)
 }

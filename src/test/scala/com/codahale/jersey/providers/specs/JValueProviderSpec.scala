@@ -14,11 +14,11 @@ class JValueProviderSpec extends Spec {
     val provider = new JValueProvider
 
     @Test def `is writable` = {
-      provider.isWriteable(value.getClass, null, null, null).must(be(true))
+      provider.isWriteable(value.getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
 
     @Test def `is readable` = {
-      provider.isReadable(value.getClass, null, null, null).must(be(true))
+      provider.isReadable(value.getClass, null, null, MediaType.APPLICATION_JSON_TYPE).must(be(true))
     }
   }
 
