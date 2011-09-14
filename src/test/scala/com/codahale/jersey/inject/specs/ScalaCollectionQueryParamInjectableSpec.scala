@@ -1,14 +1,13 @@
 package com.codahale.jersey.inject.specs
 
 import com.codahale.simplespec.Spec
-import com.codahale.simplespec.annotation.test
+import org.junit.Test
 import com.codahale.jersey.inject.ScalaCollectionQueryParamInjectable
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import com.sun.jersey.api.core.{ExtendedUriInfo, HttpContext}
 import javax.ws.rs.core.MultivaluedMap
-import org.specs2.mock.Mockito
 
-class ScalaCollectionQueryParamInjectableSpec extends Spec with Mockito {
+class ScalaCollectionQueryParamInjectableSpec extends Spec {
   // TODO: Aug 17, 2010 <coda> -- test error handling
 
   val extractor = mock[MultivaluedParameterExtractor]
@@ -24,10 +23,10 @@ class ScalaCollectionQueryParamInjectableSpec extends Spec with Mockito {
     val injectable = new ScalaCollectionQueryParamInjectable(extractor, true)
     uriInfo.getQueryParameters(true) returns params
 
-    @test def `extracts the query parameters` = {
+    @Test def `extracts the query parameters` = {
       val e = injectable.getValue(context)
 
-      e must beEqualTo(extracted)
+      e.must(be(extracted))
     }
   }
 
@@ -35,10 +34,10 @@ class ScalaCollectionQueryParamInjectableSpec extends Spec with Mockito {
     val injectable = new ScalaCollectionQueryParamInjectable(extractor, false)
     uriInfo.getQueryParameters(false) returns params
 
-    @test def `extracts the query parameters` = {
+    @Test def `extracts the query parameters` = {
       val e = injectable.getValue(context)
 
-      e must beEqualTo(extracted)
+      e.must(be(extracted))
     }
   }
 }

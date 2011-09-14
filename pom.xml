@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.codahale</groupId>
-    <artifactId>jersey-scala_2.9.0-1</artifactId>
-    <version>0.1.8</version>
+    <artifactId>jersey-scala_2.9.1</artifactId>
+    <version>0.1.9</version>
     <name>Jersey Support for Scala ${scala.version}</name>
 
     <properties>
-        <scala.version>2.9.0-1</scala.version>
+        <scala.version>2.9.1</scala.version>
     </properties>
 
     <developers>
@@ -78,28 +78,28 @@
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>jerkson_${scala.version}</artifactId>
-            <version>0.4.0</version>
+            <version>0.4.1</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>1.8</version>
+            <version>1.9</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>simplespec_${scala.version}</artifactId>
-            <version>0.4.0</version>
+            <version>0.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -18,8 +18,12 @@ import java.io.{IOException, InputStream, OutputStream}
 class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product] {
   private val logger = LoggerFactory.getLogger(classOf[JsonCaseClassProvider])
 
-  def writeTo(json: Product, t: Class[_], genericType: Type, annotations: Array[Annotation],
-              mediaType: MediaType, httpHeaders: MultivaluedMap[String, AnyRef],
+  def writeTo(json: Product,
+              t: Class[_],
+              genericType: Type,
+              annotations: Array[Annotation],
+              mediaType: MediaType,
+              httpHeaders: MultivaluedMap[String, AnyRef],
               entityStream: OutputStream) {
     try {
       Json.generate(json, entityStream)
@@ -29,13 +33,17 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
     }
   }
 
-  def isWriteable(t: Class[_], genericType: Type, annotations: Array[Annotation],
+  def isWriteable(t: Class[_],
+                  genericType: Type,
+                  annotations: Array[Annotation],
                   mediaType: MediaType) =
-    mediaType == MediaType.APPLICATION_JSON_TYPE &&
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
             classOf[Product].isAssignableFrom(t)
 
-  def readFrom(t: Class[Product], genericType: Type,
-               annotations: Array[Annotation], mediaType: MediaType,
+  def readFrom(t: Class[Product],
+               genericType: Type,
+               annotations: Array[Annotation],
+               mediaType: MediaType,
                httpHeaders: MultivaluedMap[String, String],
                entityStream: InputStream): Product = {
     try {
@@ -56,8 +64,10 @@ class JsonCaseClassProvider extends AbstractMessageReaderWriterProvider[Product]
     }
   }
 
-  def isReadable(t: Class[_], genericType: Type, annotations: Array[Annotation],
+  def isReadable(t: Class[_],
+                 genericType: Type,
+                 annotations: Array[Annotation],
                  mediaType: MediaType): Boolean =
-    mediaType == MediaType.APPLICATION_JSON_TYPE &&
+    MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType) &&
             classOf[Product].isAssignableFrom(t)
 }
