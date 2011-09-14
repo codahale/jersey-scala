@@ -1,3 +1,12 @@
+v0.1.9: Sep 13 2011
+===================
+
+* Upgraded to Jersey 1.9.
+* Upgraded to Jerkson 0.4.1.
+* Upgraded to Slf4j 1.6.2.
+* Added support for Scala 2.9.1.
+* Fixed issues with parameterized media types and deserializing JSON entities.
+
 v0.1.8: Aug 11 2011
 ===================
 
