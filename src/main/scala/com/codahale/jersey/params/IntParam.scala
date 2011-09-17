@@ -1,5 +1,9 @@
 package com.codahale.jersey.params
 
+object IntParam {
+  def apply(value: Int): IntParam = IntParam(value.toString)
+}
+
 /**
  * Parses ints.
  */

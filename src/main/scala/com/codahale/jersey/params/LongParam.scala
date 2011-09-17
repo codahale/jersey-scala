@@ -1,5 +1,9 @@
 package com.codahale.jersey.params
 
+object LongParam {
+  def apply(value: Long): LongParam = LongParam(value.toString)
+}
+
 /**
  * Parses longs.
  */
