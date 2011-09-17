@@ -6,8 +6,6 @@ import javax.ws.rs.core.Response.Status
 
 /**
  * An abstract base class from which to build parameter classes.
- *
- * @author coda
  */
 abstract class AbstractParam[A](val input: String) {
   val value: A = try {
