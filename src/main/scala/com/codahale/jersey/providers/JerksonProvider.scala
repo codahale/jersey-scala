@@ -15,10 +15,10 @@ import scala.reflect.Manifest
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
 @Consumes(Array(MediaType.APPLICATION_JSON))
-class ArrayProvider[A] extends AbstractMessageReaderWriterProvider[Array[A]] {
-  private val logger = LoggerFactory.getLogger(classOf[ArrayProvider[A]])
+class JerksonProvider[A] extends AbstractMessageReaderWriterProvider[A] {
+  private val logger = LoggerFactory.getLogger(classOf[JerksonProvider[_]])
 
-  def readFrom(klass: Class[Array[A]],
+  def readFrom(klass: Class[A],
                genericType: Type,
                annotations: Array[Annotation],
                mediaType: MediaType,
@@ -38,9 +38,9 @@ class ArrayProvider[A] extends AbstractMessageReaderWriterProvider[Array[A]] {
   def isReadable(klass: Class[_],
                  genericType: Type,
                  annotations: Array[Annotation],
-                 mediaType: MediaType) = klass.isArray
+                 mediaType: MediaType) = mediaType.isCompatible(MediaType.APPLICATION_JSON_TYPE)
 
-  def writeTo(t: Array[A],
+  def writeTo(t: A,
               klass: Class[_],
               genericType: Type,
               annotations: Array[Annotation],
@@ -51,12 +51,12 @@ class ArrayProvider[A] extends AbstractMessageReaderWriterProvider[Array[A]] {
       Json.generate(t, entityStream)
     } catch {
       case e: IOException => logger.debug("Error writing to stream", e)
-      case e => logger.error("Error encoding %s as JSON".format(t.mkString("Array(", ",", ")")), e)
+      case e => logger.error("Error encoding %s as JSON".format(t, e))
     }
   }
 
   def isWriteable(klass: Class[_],
                   genericType: Type,
                   annotations: Array[Annotation],
-                  mediaType: MediaType) = klass.isArray
+                  mediaType: MediaType) = mediaType.isCompatible(MediaType.APPLICATION_JSON_TYPE)
 }

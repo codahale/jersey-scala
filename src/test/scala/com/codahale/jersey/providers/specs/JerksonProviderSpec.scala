@@ -3,12 +3,12 @@ package com.codahale.jersey.providers.specs
 import com.codahale.simplespec.Spec
 import org.junit.Test
 import javax.ws.rs.core.MediaType
-import com.codahale.jersey.providers.ArrayProvider
+import com.codahale.jersey.providers.JerksonProvider
 import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
 
-class ArrayProviderSpec extends Spec {
-  private val provider = new ArrayProvider[Int]
+class JerksonProviderSpec extends Spec {
+  private val provider = new JerksonProvider[Array[Int]]
 
   class `An array of ints` {
     @Test def `is writable` = {
