@@ -1,3 +1,12 @@
+v0.2.0: Sep 20 2011
+===================
+
+* Upgraded to Jersey 1.9.1.
+* Upgraded to Jerkson 0.4.2.
+* Replaced specialized `MessageReaderWriterProvider`s with `JerksonProvider`,
+  allowing Jersey resources to produce or consume any objects which Jerkson can
+  serialize or deserialize.
+
 v0.1.9: Sep 13 2011
 ===================
 
