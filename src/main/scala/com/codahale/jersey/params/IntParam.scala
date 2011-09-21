@@ -1,9 +1,11 @@
 package com.codahale.jersey.params
 
+object IntParam {
+  def apply(value: Int): IntParam = IntParam(value.toString)
+}
+
 /**
  * Parses ints.
- * 
- * @author coda
  */
 case class IntParam(s: String) extends AbstractParam[Int](s) {
   protected def parse(input: String) = input.toInt

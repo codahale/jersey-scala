@@ -8,8 +8,6 @@ import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParamet
  * the first parameter values and return a Some instance, returning the default
  * value if no parameter exists. If defaultValue is null and no parameter
  * exists, returns None.
- *
- * @author coda
  */
 class ScalaOptionStringExtractor(parameter: String, defaultValue: String)
         extends MultivaluedParameterExtractor {

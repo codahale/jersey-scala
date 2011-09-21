@@ -10,8 +10,8 @@ Requirements
 ------------
 
 * Scala 2.8.1 or 2.9.0-1 or 2.9.1
-* Jerkson 0.4.1
-* Jersey 1.9
+* Jerkson 0.4.2
+* Jersey 1.9.1
 * Slf4j API 1.6.2
 
 
@@ -24,7 +24,7 @@ How To Use
 <dependency>
     <groupId>com.codahale</groupId>
     <artifactId>jersey-scala_${scala.version}</artifactId>
-    <version>0.1.9</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 

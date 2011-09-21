@@ -10,8 +10,6 @@ import scala.collection.generic.GenericCompanion
  * companion object, attempts to extract all the parameter values and return a
  * collection instance. If defaultValue is null and no parameter exists, returns
  * an empty collection.
- *
- * @author coda
  */
 class ScalaCollectionStringReaderExtractor[+CC[X] <: Traversable[X]](parameter: String,
                                                                      defaultValue: String,

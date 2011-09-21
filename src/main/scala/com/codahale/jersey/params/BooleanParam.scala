@@ -1,9 +1,11 @@
 package com.codahale.jersey.params
 
+object BooleanParam {
+  def apply(value: Boolean): BooleanParam = BooleanParam(value.toString)
+}
+
 /**
  * Parses "true" and "false" to Boolean values.
- *
- * @author coda
  */
 case class BooleanParam(s: String) extends AbstractParam[Boolean](s) {
   protected def parse(input: String) = input.toBoolean

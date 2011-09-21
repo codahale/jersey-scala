@@ -1,9 +1,11 @@
 package com.codahale.jersey.params
 
+object LongParam {
+  def apply(value: Long): LongParam = LongParam(value.toString)
+}
+
 /**
  * Parses longs.
- *
- * @author coda
  */
 case class LongParam(s: String) extends AbstractParam[Long](s) {
   protected def parse(input: String) = input.toLong
