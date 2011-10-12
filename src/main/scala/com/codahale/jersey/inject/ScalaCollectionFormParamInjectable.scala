@@ -5,16 +5,15 @@ import com.sun.jersey.api.core.HttpContext
 import com.sun.jersey.server.impl.inject.AbstractHttpContextInjectable
 import com.sun.jersey.server.impl.model.parameter.multivalued.{MultivaluedParameterExtractor, ExtractorContainerException}
 
-class ScalaCollectionQueryParamInjectable(extractor: MultivaluedParameterExtractor,
-                                          decoded: Boolean)
+class ScalaCollectionFormParamInjectable(extractor: MultivaluedParameterExtractor)
         extends AbstractHttpContextInjectable[Object] {
 
   def getValue(c: HttpContext) = try {
-    extractor.extract(c.getUriInfo.getQueryParameters(decoded))
+    extractor.extract(c.getRequest.getFormParameters)
   } catch {
     case e: ExtractorContainerException =>
-      throw new ParamException.QueryParamException(e.getCause,
-                                                   extractor.getName,
-                                                   extractor.getDefaultStringValue)
+      throw new ParamException.FormParamException(e.getCause,
+                                                  extractor.getName,
+                                                  extractor.getDefaultStringValue)
   }
 }
