@@ -32,7 +32,7 @@ How To Use
 
 ```scala
 @Path("/things")
-@Produces("text/plain")
+@Produces(Array("text/plain"))
 class Things {
   @GET
   def getAThing(@QueryParam("name") names: Set[String]) = "I found: " + names.mkString(", ")
