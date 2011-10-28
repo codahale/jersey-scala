@@ -50,8 +50,8 @@ class JerksonProvider[A] extends AbstractMessageReaderWriterProvider[A] {
     try {
       Json.generate(t, entityStream)
     } catch {
-      case e: IOException => logger.debug("Error writing to stream", e)
-      case e => logger.error("Error encoding %s as JSON".format(t, e))
+      case e: IOException => throw new WebApplicationException("Error writing to stream", e)
+      case e => throw new WebApplicationException("Error encoding %s as JSON".format(t, e))
     }
   }
 
