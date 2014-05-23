@@ -8,21 +8,21 @@ import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParamet
 import javax.ws.rs.{FormParam, QueryParam}
 
 @Provider
-class ScalaCollectionsQueryParamInjectableProvider
+class ScalaCollectionsFormParamInjectableProvider
   extends AbstractScalaCollectionsParamInjectableProvider
-  with InjectableProvider[QueryParam, Parameter]
+  with InjectableProvider[FormParam, Parameter]
 {
-  def getInjectable(ic: ComponentContext, a: QueryParam, c: Parameter): Injectable[_] = {
+  def getInjectable(ic: ComponentContext, a: FormParam, c: Parameter): Injectable[_] = {
     val parameterName = c.getSourceName()
     if (parameterName != null && !parameterName.isEmpty) {
-      buildInjectable(parameterName, c.getDefaultValue, !c.isEncoded, c.getParameterClass)
+      buildInjectable(parameterName, c.getDefaultValue, c.getParameterClass)
     } else null
   }
 
-  private def buildInjectable(name: String, default: String, decoded: Boolean, klass: Class[_]): Injectable[_ <: Object] = {
+  private def buildInjectable(name: String, default: String, klass: Class[_]): Injectable[_ <: Object] = {
     val extractor = buildExtractor(name, default, klass)
     if (extractor != null) {
-      new ScalaCollectionQueryParamInjectable(extractor, decoded)
+      new ScalaCollectionFormParamInjectable(extractor)
     } else null
   }
 }
